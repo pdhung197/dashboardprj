@@ -1,0 +1,24 @@
+/* Validator styles */
+
+form.auth-form {
+  transition: 0.3s;
+}
+
+.validate-text {
+  margin: 0;
+  padding: 0;
+  padding-top: 1rem;
+  padding-left: 1.75rem;
+  opacity: 1;
+  visibility: visible;
+  color: #f00;
+  transition: opacity 0.3s, visibility 0.3s, padding-top 0.3s;
+  &.text-hidden {
+    height: 0;
+    padding-top: 0;
+    opacity: 0;
+    visibility: hidden;
+    color: transparent;
+    transition: opacity 0.3s, visibility 0.3s, padding-top 0.3s;
+  }
+}

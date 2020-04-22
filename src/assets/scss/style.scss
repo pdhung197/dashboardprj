@@ -74,12 +74,12 @@
 
 /*-------------------------------------------------------------------*/
 /* === Template mixins === */
-@import "mixins/misc";
-@import "mixins/badges";
-@import "mixins/animation";
-@import "mixins/blockqoute";
-@import "mixins/buttons";
-@import "mixins/cards";
+@import "./mixins/misc";
+@import "./mixins/badges";
+@import "./mixins/animation";
+@import "./mixins/blockqoute";
+@import "./mixins/buttons";
+@import "./mixins/cards";
 
 /*-------------------------------------------------------------------*/
 /* === Core Styles === */
@@ -95,21 +95,21 @@
 
 /*-------------------------------------------------------------------*/
 /* === Components === */
-@import "components/buttons";
-@import "components/badges";
-@import "components/bootstrap-progress";
-@import "components/cards";
-@import "components/checkbox-radio";
-@import "components/dropdown";
-@import "components/forms";
-@import "components/icons";
-@import "components/lists";
-@import "components/tables";
-@import "components/todo-list";
+@import "./components/buttons";
+@import "./components/badges";
+@import "./components/bootstrap-progress";
+@import "./components/cards";
+@import "./components/checkbox-radio";
+@import "./components/dropdown";
+@import "./components/forms";
+@import "./components/icons";
+@import "./components/lists";
+@import "./components/tables";
+@import "./components/todo-list";
 
 /*-------------------------------------------------------------------*/
 /* === Landing screens === */
-@import "landing-screens/auth";
+@import "./landing-screens/auth";
 
 @import "vertical-wrapper";
 @import "sidebar";
