@@ -18,25 +18,29 @@ export const callApi = (
         url
     };
 
-    let myHeaders = new Headers();
-    myHeaders.append('x-request-id', uuidv4({ msecs: new Date().getTime() }))
-    if (config.isFormData) {
-        myHeaders.append("Accept", "application/json");
-    } else {
-        myHeaders.append("Accept", "application/json");
-        myHeaders.append("Content-Type", "application/json");
-    }
+    let headers = new Headers();
+    headers.append('x-request-id', uuidv4({ msecs: new Date().getTime() }))
+    headers.append("Accept", "application/json");
+    headers.append("Content-Type", "application/json");
 
     if (user) {
-        /* myHeaders.append('Authorization', 'Bearer ' + user); */
-        myHeaders = {
-            ...myHeaders,
-            Authorization: `Bearer ${user}`,
-            "Content-Type": "application/json"
+        headers = {
+            ...headers,
+            Authorization: `Bearer ${user}`
         }
     }
-    if (myHeaders) options.headers = myHeaders;
+    if (headers) options.headers = headers;
 
-    return axios(options)
+    axios.interceptors.response.use(response => {
+        return response;
+    }, error => {
+        if (error.response.status === 401) {
+            window.location = '/login'
+        }
+        return error;
+    });
 
+    const clientRequest = axios(options);
+
+    return clientRequest;
 }
