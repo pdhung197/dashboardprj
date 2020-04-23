@@ -101,7 +101,7 @@ class TablePagin extends Component {
                         <option value={20}>20</option>
                         <option value={30}>30</option>
                     </select>
-                    <span>{getLanguageKey('table.page')}</span>
+                    <span className="ml-2">{getLanguageKey('table.page')}</span>
                     <select
                         name="activedPage"
                         id="activedPage"

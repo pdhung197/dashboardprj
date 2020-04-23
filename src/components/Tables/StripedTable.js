@@ -44,29 +44,31 @@ class StripedTable extends Component {
             handleNextOrPreviousPage = () => { }
         } = this.props || {}
         return (
-            <div className="table-responsive">
-                <table className="table table-striped">
-                    <thead>
-                        <tr>
+            <>
+                <div className="table-responsive">
+                    <table className="table table-striped">
+                        <thead>
+                            <tr>
+                                {
+                                    tableHeaders.map((tableHeader, index) => {
+                                        return (<th key={index}>
+                                            {tableHeader}
+                                        </th>)
+                                    })
+                                }
+                            </tr>
+                        </thead>
+                        <tbody>
                             {
-                                tableHeaders.map((tableHeader, index) => {
-                                    return (<th key={index}>
-                                        {tableHeader}
-                                    </th>)
-                                })
+                                bodyData.map((row, index) => <TableRow
+                                    key={index}
+                                    rowData={row}
+                                    columns={tableColumns}
+                                />)
                             }
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            bodyData.map((row, index) => <TableRow
-                                key={index}
-                                rowData={row}
-                                columns={tableColumns}
-                            />)
-                        }
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
                 {
                     !noPagination && <TablePagin
                         paginData={footerData}
@@ -75,7 +77,7 @@ class StripedTable extends Component {
                         handleNextOrPreviousPage={handleNextOrPreviousPage}
                     />
                 }
-            </div>
+            </>
         )
     }
 }
