@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 
 import TablePagin from './TablePagin';
 
+import './_table.scss';
+
 class TableRow extends Component {
     render() {
         const {
@@ -60,11 +62,16 @@ class StripedTable extends Component {
                         </thead>
                         <tbody>
                             {
-                                bodyData.map((row, index) => <TableRow
+                                bodyData && bodyData.length ? bodyData.map((row, index) => <TableRow
                                     key={index}
                                     rowData={row}
                                     columns={tableColumns}
                                 />)
+                                    : <tr>
+                                        <td colSpan={tableHeaders.length}>
+                                            <p className="no-data">Nothing to show</p>
+                                        </td>
+                                    </tr>
                             }
                         </tbody>
                     </table>

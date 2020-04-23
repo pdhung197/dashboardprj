@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 
 import { getLanguageKey } from './../../utils/commonFunc';
 
-import './_tablePagin.scss';
 
 class PageNav extends Component {
     render() {

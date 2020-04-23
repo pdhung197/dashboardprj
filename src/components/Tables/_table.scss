@@ -1,6 +1,14 @@
 /* Table Pagination style */
 @import "./../../assets/scss/variables";
 
+.table {
+  .no-data {
+    margin: 0;
+    text-align: center;
+    color: $card-title-color;
+    font-size: 1.2em;
+  }
+}
 .pagination {
   background-color: $content-bg;
   border-top: 1px solid $border-color;
