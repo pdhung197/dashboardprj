@@ -13,7 +13,8 @@ export default class Validator extends Component {
         const {
             validationCallback,
             id,
-            hideMessage
+            hideMessage,
+            disabled
         } = this.props;
         let invalidMessage = null;
         for (const valid of validType) {
@@ -36,28 +37,18 @@ export default class Validator extends Component {
         }
         setTimeout(() => validationCallback && validationCallback(id, !invalidMessage));
         return <p
-            className={`validate-text font-italic ${hideMessage ? 'text-hidden' : ''}`}
+            className={`validate-text font-italic ${hideMessage || disabled ? 'text-hidden' : ''}`}
         >
-            {!hideMessage ? invalidMessage : '_'}
+            {hideMessage || disabled ? '_' : invalidMessage}
         </p>;
     }
 
     render() {
         const {
-            disabled,
-            validationCallback,
-            id,
             validType = [],
             value
         } = this.props;
 
-        if (!disabled) return this.renderInvalidMessage(validType, value);
-
-        setTimeout(() => validationCallback && validationCallback(id, true))
-        return <p
-            className="validate-text font-italic text-hidden"
-        >
-            _
-        </p>
+        return this.renderInvalidMessage(validType, value);
     }
 }

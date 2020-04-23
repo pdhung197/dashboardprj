@@ -26,24 +26,17 @@ export const callApi = (
         myHeaders.append("Accept", "application/json");
         myHeaders.append("Content-Type", "application/json");
     }
-    myHeaders.append('Access-Control-Allow-Origin', '*');
-    myHeaders.append('Access-Control-Allow-Credentials', true);
-    myHeaders.append('Access-Control-Allow-Methods', 'GET, POST, PUT');
-    myHeaders.append('Access-Control-Allow-Headers', 'X-Custom-Header');
+
     if (user) {
-        myHeaders.Authorization = 'Bearer ' + user
+        /* myHeaders.append('Authorization', 'Bearer ' + user); */
+        myHeaders = {
+            ...myHeaders,
+            Authorization: `Bearer ${user}`,
+            "Content-Type": "application/json"
+        }
     }
-    if (Object.keys(myHeaders).length) options.headers = myHeaders;
+    if (myHeaders) options.headers = myHeaders;
 
     return axios(options)
-    /* .then(response => {
-        console.log({ response });
-        if (onRequestSuccess) onRequestSuccess(response);
-        return response;
-    })
-    .catch(error => {
-        console.log({ error });
-        if (onRequestFailure) onRequestFailure(error);
-        return error
-    }); */
+
 }

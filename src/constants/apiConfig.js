@@ -4,4 +4,4 @@ export const serverBase = process.env.REACT_APP_API_URL;
 export const loginApi = serverBase + 'login';
 
 /* User list api */
-export const userListApi = serverBase + 'user';
+export const userListApi = serverBase + 'users';

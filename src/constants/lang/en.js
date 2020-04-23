@@ -23,5 +23,17 @@ export const en = {
         emailIsInvalid: 'Please input valid email',
         countryIsRequired: 'Please choose your country',
         passwordIsRequired: 'Please input the password'
+    },
+    userList: {
+        avatar: 'Avatar',
+        name: 'Name',
+        email: 'Email',
+        phone: 'Phone'
+    },
+    table: {
+        itemsPerPage: 'Items per page',
+        itemsShown: '{1} of {2} shown',
+        page: 'Page',
+        of: 'of'
     }
 }

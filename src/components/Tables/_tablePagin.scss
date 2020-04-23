@@ -1,0 +1,68 @@
+/* Table Pagination style */
+@import "./../../assets/scss/variables";
+
+.pagination {
+  background-color: $content-bg;
+  border-top: 1px solid $border-color;
+  border-radius: 0;
+  display: block;
+  padding: 0;
+
+  span {
+    font-size: 0.9em;
+    line-height: 2;
+  }
+
+  &__select {
+    float: left;
+    text-align: left;
+    padding: 0.5rem 1rem;
+    padding-right: 0;
+    select {
+      background-color: transparent;
+      margin: 0 5px;
+      border-radius: 5px;
+      padding: 0 5px;
+    }
+  }
+  &__controller {
+    float: right;
+    text-align: right;
+    padding: 0.5rem 1rem;
+    padding-left: 0;
+  }
+  &__page-nav {
+    display: inline-block;
+    padding-left: 1rem;
+    &--controlled-button {
+      background-color: $white-smoke;
+      box-sizing: border-box;
+      outline: none;
+      border: 1px solid $border-color;
+      border-radius: 50%;
+      height: 2rem;
+      width: 2rem;
+      margin-left: 3px;
+      transition: 0.2s;
+      &:hover {
+        background-color: $nav-pills-custom-bg;
+        transition: 0.2s;
+      }
+    }
+
+    &--controlled-number {
+      border-color: transparent;
+      background-color: transparent;
+      &.btn-actived {
+        background-color: $nav-pills-custom-bg;
+        transition: 0.2s;
+      }
+    }
+  }
+  &::after {
+    content: "";
+    display: block;
+    height: 0;
+    clear: both;
+  }
+}

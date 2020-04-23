@@ -10,15 +10,18 @@ import Validator from './../../components/Validator/Validator';
 
 import { countries } from './../../constants/constants';
 
-import { getLanguageKey } from './../../utils/commonFunc';
+import { getLanguageKey, isValidRequest } from './../../utils/commonFunc';
 
 import { login } from './../../actions/authActions';
+
+import './../../components/Validator/_validator.scss';
 
 class AuthForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
       isSubmitted: false,
+      loginStatus: null,
       data: {
         userName: '',
         email: 'admin',
@@ -44,8 +47,16 @@ class AuthForm extends Component {
     loginAction
       .then(response => {
         const { data } = response || {};
-        if (!data) return;
+        if (!data || data === '') {
+          return this.setState({
+            loginStatus: false
+          });
+        }
         localStorage.setItem('jwtToken', data.token);
+        this.setState({
+          loginStatus: true,
+          isSubmitted: false
+        })
         this.props.history.push('/')
       })
       .catch(error => console.log(error))
@@ -54,9 +65,12 @@ class AuthForm extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     this.setState({
-      isSubmitted: true
+      isSubmitted: true,
+      loginStatus: null
     })
     const { authType = 'login' } = this.props || {};
+    const { valid } = this.state || {};
+    if (!isValidRequest(valid)) return;
 
     switch (authType) {
       case 'login':
@@ -95,6 +109,7 @@ class AuthForm extends Component {
 
     const {
       isSubmitted,
+      loginStatus = null,
       data: {
         userName = '',
         email = '',
@@ -115,7 +130,7 @@ class AuthForm extends Component {
                 type="text"
                 className="form-control form-control-lg"
                 id="userName"
-                placeholder={getLanguageKey('authForm.userName')}
+                placeholder={getLanguageKey('authForm.userName').label}
                 value={userName}
                 autoFocus={true}
                 onChange={(e) => this.handleChangeInput('userName', e)}
@@ -143,7 +158,7 @@ class AuthForm extends Component {
               type="text"
               className="form-control form-control-lg"
               id="email"
-              placeholder={getLanguageKey(`authForm.${authType === 'login' ? 'userName' : 'email'}`)}
+              placeholder={getLanguageKey(`authForm.${authType === 'login' ? 'userName' : 'email'}`).label}
               value={email}
               autoFocus={authType === 'login' ? true : false}
               onChange={(e) => this.handleChangeInput('email', e)}
@@ -177,7 +192,7 @@ class AuthForm extends Component {
                 className="form-control form-control-lg"
                 id="countryCode"
               >
-                <option value="" disabled>{getLanguageKey('authForm.country')}</option>
+                <option value="" disabled>{getLanguageKey('authForm.country').label}</option>
                 {
                   (countries || []).map((country, index) => (
                     <option key={index} value={country.code}>{country.name}</option>
@@ -207,7 +222,7 @@ class AuthForm extends Component {
               type="password"
               className="form-control form-control-lg"
               id="password"
-              placeholder="Password"
+              placeholder={getLanguageKey('authForm.password').label}
               value={password}
               onChange={(e) => this.handleChangeInput('password', e)}
             />
@@ -244,6 +259,14 @@ class AuthForm extends Component {
                 </label>
               </div>
             </div>
+          }
+
+          {
+            authType === 'login' && <p
+              className={`validate-text font-italic ${loginStatus !== false ? 'text-hidden' : ''}`}
+            >
+              {loginStatus === false ? 'Login fail' : '_'}
+            </p>
           }
 
           <div
